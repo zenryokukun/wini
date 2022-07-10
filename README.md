@@ -10,7 +10,7 @@ It will let you read,edit,and create .ini file.
   - *key-value data*  
 
 
-- How are *omments* treated?
+- How are *comments* treated?
   - wini assumes that comments come *before* section or key-value data.  
   - Texts that start with '#' and ";" are considered as comments by default.  
   - wini **does not** support multi-character comment symbols,multi-line comment symbols, and inline-comment.  
@@ -18,7 +18,7 @@ It will let you read,edit,and create .ini file.
 
 - About *section* and *key-value data*
   - Texts that start with "[" and end with "]" are considered as *section* by default.
-  - wini assumes Keys and values are separated by "=" by default.
+  - By default,wini assumes Keys and values are separated by "=" .
 
 
 - Example:
@@ -44,9 +44,33 @@ Hobby = Fishing # inline comment
 ```
 
 ## Usage
+Let's say we have a section file like below:
+```
+# Name and age of the author.
+[Author]
+Name = ZEN
+Age = 1
+
+# Some basic info about the author.
+[Info]
+National = JAPAN
+Home     = SAKURA-VPS 
+Likes    = birds!
+# Roaches in Japan are huge.
+# I mean it.
+Dislikes = roaches!
+```
+
 - Reading *.ini* file.   
 ```golang
-file := wini.Load("*iniFilePath.ini*")
+// file is a map data that has section names as its keys.
+file := wini.Load("iniFilePath.ini")
 
+// Data method will get all the key-value data.
+// Key-value data are mapped as map[string]string.
+// Note that it will not get the comments.
+author := file["Author"].Data()
+fmt.Println(author) 
 
+// [output]:map[Age:1 Name:ZEN]
 ```
