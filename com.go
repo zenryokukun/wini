@@ -36,6 +36,11 @@ func (com *Comment) Ptr() *lnode {
 	return com.ptr
 }
 
+//Get text of the node.
+func (com *Comment) Get() string {
+	return com.ptr.text
+}
+
 //range of `comments.`
 func (coms Comments) Range() (*lnode, *lnode) {
 	//find a comment that is not <nil>.

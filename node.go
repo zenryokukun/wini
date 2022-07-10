@@ -44,11 +44,6 @@ func newLNode(l string) *lnode {
 	}
 }
 
-// Returns the text of the node.
-func (l *lnode) Get() string {
-	return l.text
-}
-
 func (l *lnode) Range() (*lnode, *lnode) {
 	return l, l
 }
