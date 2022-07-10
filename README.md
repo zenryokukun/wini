@@ -9,8 +9,13 @@ It will let you read,edit,and create .ini file.
   - *key-value comments* 
   - *key-value data*  
 
-It also assumes that comments come *before* section or key-value data.
+- How are *omments* treated?
+  - wini assumes that comments come *before* section or key-value data.  
+  - Texts that start with '#' and ";" are considered as comments by default.  
+  - wini **does not** support multi-character comment,multi-line comment, and inline-comment.  
 
+- About *section* and *key-value data*
+  - Texts that start with "[" and end with "]" are considered as *section*.
 - Example:
 
 
