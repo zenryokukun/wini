@@ -24,7 +24,7 @@ It will let you read,edit,and create .ini file.
 - Example:
 ```
 # This is a "Author" section comment.
-# So is.
+# So is this.
 [Author]
 Name = Zenryoku-kun
 # This is a "Age" key-val data comment.
@@ -61,7 +61,7 @@ Likes    = birds!
 Dislikes = roaches!
 ```
 
-- Reading *.ini* file.   
+### Reading *.ini* file.   
 ```golang
 // file is a map data that has section names as its keys.
 file := wini.Load("iniFilePath.ini")
@@ -98,4 +98,25 @@ ChangeSectionSym("'", "'")
 AddCommentSym("?")         
 
 file := Load("iniFilePath.ini")
+```
+### Editing *.ini* file.
+- Changing section names, key-value keys and values, and comments:
+```golang
+// Change section name. Section symbols are not required.
+sec := f["Author"]
+sec.ChangeName("Founder")
+
+// Print all section data,which has section comments and section name.
+// Check function retrieves each line of section comments and section itself as string.
+secStr := Check(sec)
+fmt.Println(secStr)
+
+// Change comment. Note that you need comment symbol.
+secCom := sec.Com(0)
+secCom.Change("# Name and age of the Founder.")
+
+// When comment is passed to Check, it gets the specified comment as a string,
+// not a whole section data.
+secComStr := Check(secCom)
+fmt.Println(secComStr)
 ```
