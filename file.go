@@ -78,7 +78,7 @@ func (f File) Merge(fs ...File) {
 }
 
 func (f File) ChangeSectionName(name, newName string) File {
-	checkSecSym(newName)
+	//checkSecSym(newName)
 	sec := f[name]
 	sec.changeName(newName)
 	//change map key.

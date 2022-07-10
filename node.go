@@ -29,6 +29,18 @@ type lnode struct {
 	prev       *lnode
 }
 
+func ChangeSepSym(ch string) {
+	sepSymbol = ch
+}
+
+func ChangeSectionSym(left, right string) {
+	sectionSymbol[0], sectionSymbol[1] = left, right
+}
+
+func AddCommentSym(ch string) {
+	commentSymbol = append(commentSymbol, ch)
+}
+
 func newLNode(l string) *lnode {
 	tp := which(l)
 	id := ""
@@ -268,5 +280,19 @@ func checkSecSym(text string) {
 	right := string(text[len(text)-1])
 	if left != sectionSymbol[0] || right != sectionSymbol[1] {
 		log.Fatal(fmt.Sprintf("lacking section symbol:%v", text))
+	}
+}
+
+// Used when changing section names or keyval key name.
+func updateIdentifier(n *lnode, id string) {
+	for {
+		if n == nil {
+			break
+		}
+		n.setIdentifier(id)
+		if n.prev != nil && n.prev.identifier != n.identifier {
+			break
+		}
+		n = n.prev
 	}
 }

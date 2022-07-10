@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type Section struct {
 	block
@@ -124,6 +126,8 @@ func (s *Section) Swap(k1, k2 string) error {
 //************************************************
 
 func (s *Section) changeName(name string) {
+	// Call this before changing name. Range() woul not work.
+	updateIdentifier(s.ptr, name)
 	s.name = name
 	left, right := sectionSymbol[0], sectionSymbol[1]
 	nameWithSym := left + name + right

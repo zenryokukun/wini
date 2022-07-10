@@ -64,6 +64,7 @@ func (kv *keyval) AddCom(texts ...string) *keyval {
 }
 
 func (kv *keyval) update(key, val string) {
+	updateIdentifier(kv.ptr, key)
 	kv.key = key
 	kv.val = val
 	newName := genKeyValText(key, val)
