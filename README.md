@@ -112,6 +112,7 @@ secStr := Check(sec)
 fmt.Println(secStr)
 
 /*[output]:
+    # Name and age of the Founder.
     [Founder]
     Name = ZEN
     Age = 1
