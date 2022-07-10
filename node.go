@@ -289,8 +289,9 @@ func updateIdentifier(n *lnode, id string) {
 		if n == nil {
 			break
 		}
+		tmpId := n.identifier
 		n.setIdentifier(id)
-		if n.prev != nil && n.prev.identifier != n.identifier {
+		if n.prev != nil && n.prev.identifier != tmpId {
 			break
 		}
 		n = n.prev
