@@ -24,7 +24,7 @@ It will let you read,edit,and create .ini file.
 - Example:
 ```
 # This is a "Author" section comment.
-# So is.
+# So is this.
 [Author]
 Name = Zenryoku-kun
 # This is a "Age" key-val data comment.
@@ -61,7 +61,7 @@ Likes    = birds!
 Dislikes = roaches!
 ```
 
-- Reading *.ini* file.   
+### Reading *.ini* file.   
 ```golang
 // file is a map data that has section names as its keys.
 file := wini.Load("iniFilePath.ini")
@@ -70,7 +70,53 @@ file := wini.Load("iniFilePath.ini")
 // Key-value data are mapped as map[string]string.
 // Note that it will not get the comments.
 author := file["Author"].Data()
-fmt.Println(author) 
+fmt.Println(author)   // [output]:map[Age:1 Name:ZEN]
 
-// [output]:map[Age:1 Name:ZEN]
+// To get section comment, use Com method.0 is the index of the comments.  
+// Get method returns the text.
+secCom := file["Author"].Com(0).Get()
+fmt.Println(secCom)  // [output]: # Name and age of the author.
+
+// Key method returns the key-val data. Then call Com and Get method just like
+// getting section comments.
+dislikeCom := file["Info"].Key("Dislikes").Com(1).Get() //[output]: # I mean it.
+```
+It's simple as that.  
+
+To Change the default key-val separator,comment symbol, and section symbol, do the following:
+```golang
+// Make sure to call these before Load.
+
+// Changes key-val separator from "=" to ":".
+ChangeSepSym(":")           
+
+// Changes section symbol from "[]" to "''"
+ChangeSectionSym("'", "'")  
+
+// Texts starting with "?" will be considered as comments.
+// Note that default symbols "#" and ";" are also valid.
+AddCommentSym("?")         
+
+file := Load("iniFilePath.ini")
+```
+### Editing *.ini* file.
+- Changing section names, key-value keys and values, and comments:
+```golang
+// Change section name. Section symbols are not required.
+sec := f["Author"]
+sec.ChangeName("Founder")
+
+// Print all section data,which has section comments and section name.
+// Check function retrieves each line of section comments and section itself as string.
+secStr := Check(sec)
+fmt.Println(secStr)
+
+// Change comment. Note that you need comment symbol.
+secCom := sec.Com(0)
+secCom.Change("# Name and age of the Founder.")
+
+// When comment is passed to Check, it gets the specified comment as a string,
+// not a whole section data.
+secComStr := Check(secCom)
+fmt.Println(secComStr)
 ```
