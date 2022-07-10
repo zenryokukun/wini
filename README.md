@@ -81,4 +81,21 @@ fmt.Println(secCom)  // [output]: # Name and age of the author.
 // getting section comments.
 dislikeCom := file["Info"].Key("Dislikes").Com(1).Get() //[output]: # I mean it.
 ```
-It's simple as that.
+It's simple as that.  
+
+To Change the default key-val separator,comment symbol, and section symbol, do the following:
+```golang
+// Make sure to call these before Load.
+
+// Changes key-val separator from "=" to ":".
+ChangeSepSym(":")           
+
+// Changes section symbol from "[]" to "''"
+ChangeSectionSym("'", "'")  
+
+// Texts starting with "?" will be considered as comments.
+// Note that default symbols "#" and ";" are also valid.
+AddCommentSym("?")         
+
+file := Load("iniFilePath.ini")
+```
