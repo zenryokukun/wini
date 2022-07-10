@@ -22,7 +22,7 @@ It will let you read,edit,and create .ini file.
 
 
 - Example:
-"""
+```
 # This is a "Author" section comment.
 # So is.
 [Author]
@@ -41,7 +41,7 @@ Country = Japan
 multi-line comment symbol.
 */
 Hobby = Fishing # inline comment
-"""
+```
 
 ## Usage
 - Reading *.ini* file.   
