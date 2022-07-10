@@ -102,14 +102,20 @@ file := Load("iniFilePath.ini")
 ### Editing *.ini* file.
 - Changing section names, key-value keys and values, and comments:
 ```golang
-// Change section name. Section symbols are not required.
-sec := f["Author"]
-sec.ChangeName("Founder")
+// Change section name from Author to Founder.
+sec := file["Author"]
+file.ChangeName("Author","Founder")
 
 // Print all section data,which has section comments and section name.
 // Check function retrieves each line of section comments and section itself as string.
 secStr := Check(sec)
 fmt.Println(secStr)
+
+/*[output]:
+    [Founder]
+    Name = ZEN
+    Age = 1
+*/
 
 // Change comment. Note that you need comment symbol.
 secCom := sec.Com(0)
@@ -119,4 +125,24 @@ secCom.Change("# Name and age of the Founder.")
 // not a whole section data.
 secComStr := Check(secCom)
 fmt.Println(secComStr)
+
+/*[outpupt]:
+    # Name and age of the Founder.
+*/
+
+// Change key-val data
+kv := file["Info"].Key("Dislikes")
+kv.ChangeKey("Hates")
+
+
+// Check function retrieves each line of key-val comments and key-val itself as string.
+kvStr := Check(kv)
+fmt.Println(kvStr)
+
+/*[output]:
+    # Roaches in Japan are huge.
+    # I mean it.
+    Hates=roaches!
+*/
+
 ```
