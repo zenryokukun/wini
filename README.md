@@ -70,7 +70,15 @@ file := wini.Load("iniFilePath.ini")
 // Key-value data are mapped as map[string]string.
 // Note that it will not get the comments.
 author := file["Author"].Data()
-fmt.Println(author) 
+fmt.Println(author)   // [output]:map[Age:1 Name:ZEN]
 
-// [output]:map[Age:1 Name:ZEN]
+// To get section comment, use Com method.0 is the index of the comments.  
+// Get method returns the text.
+secCom := file["Author"].Com(0).Get()
+fmt.Println(secCom)  // [output]: # Name and age of the author.
+
+// Key method returns the key-val data. Then call Com and Get method just like
+// getting section comments.
+dislikeCom := file["Info"].Key("Dislikes").Com(1).Get() //[output]: # I mean it.
 ```
+It's simple as that.
