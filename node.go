@@ -69,7 +69,8 @@ func (l *lnode) insert(n *lnode) {
 	//link l <-> nxt
 	n.next = nxt
 	if nxt != nil {
-		nxt.prev = l
+		//nxt.prev = l
+		nxt.prev = n
 	}
 }
 

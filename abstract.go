@@ -78,6 +78,12 @@ func swapAdjacent(h1, t1, h2, t2 *lnode) {
 	if prev != nil {
 		prev.next = right_h
 	}
+
+	//Add empty line between section after swapping.
+	if right_t.ntype != EMPTY {
+		right_t.insert(&lnode{ntype: EMPTY, identifier: right_t.identifier, text: ""})
+	}
+
 }
 
 func swapRange(h1, t1, h2, t2 *lnode) {
@@ -98,6 +104,14 @@ func swapRange(h1, t1, h2, t2 *lnode) {
 	t2.next = tmpTailNext
 	if tmpTailNext != nil {
 		tmpTailNext.prev = t2
+	}
+
+	//Add empty line between section after swapping.
+	if t1.ntype != EMPTY {
+		t1.insert(&lnode{ntype: EMPTY, identifier: t1.identifier, text: ""})
+	}
+	if t2.ntype != EMPTY {
+		t2.insert(&lnode{ntype: EMPTY, identifier: t2.identifier, text: ""})
 	}
 }
 
