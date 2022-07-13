@@ -139,18 +139,17 @@ kv.ChangeKey("Hates")
 // Check function retrieves each line of key-val comments and key-val itself as string.
 kvStr := Check(kv)
 fmt.Println(kvStr)
-
-/*[output]:
-    # Roaches in Japan are huge.
-    # I mean it.
-    Hates=roaches!
-*/
-
+```
+```
+[output]:
+# Roaches in Japan are huge.
+# I mean it.
+Hates=roaches!
 ```
 
-### Changing order of  sections or key-val data:  
+- Changing order of  sections or key-val data:  
+Swapping sections.
 ```golang
-// Swapping sections.
 file.Swap("Author","Info")
 fmt.Println(Check(file))
 ```
@@ -170,8 +169,8 @@ Dislikes = roaches!
 Name = ZEN
 Age = 1
 ```
+Swapping key-val data.
 ```golang
-// Swapping key-val data.
 file["Info"].Swap("Likes", "Dislikes")
 fmt.Println(Check(file["Info"]))
 ```
