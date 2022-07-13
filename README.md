@@ -153,22 +153,24 @@ fmt.Println(kvStr)
 // Swapping sections.
 file.Swap("Author","Info")
 fmt.Println(Check(file))
-/*[output]:
-    # Some basic info about the author.
-    [Info]
-    National = JAPAN
-    Home     = SAKURA-VPS
-    Likes    = birds!
-    # Roaches in Japan are huge.
-    # I mean it.
-    Dislikes = roaches!
+```
+```
+[output]:
+# Some basic info about the author.
+[Info]
+National = JAPAN
+Home     = SAKURA-VPS
+Likes    = birds!
+# Roaches in Japan are huge.
+# I mean it.
+Dislikes = roaches!
 
-    # Name and age of the author.
-    [Author]
-    Name = ZEN
-    Age = 1
-*/
-
+# Name and age of the author.
+[Author]
+Name = ZEN
+Age = 1
+```
+```golang
 // Swapping key-val data.
 file["Info"].Swap("Likes", "Dislikes")
 fmt.Println(Check(file["Info"]))
