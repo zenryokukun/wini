@@ -170,6 +170,17 @@ fmt.Println(Check(file))
 */
 
 // Swapping key-val data.
-
-
+file["Info"].Swap("Likes", "Dislikes")
+fmt.Println(Check(file["Info"]))
+```
+[output]:  
+```
+# Some basic info about the author.
+[Info]
+National = JAPAN
+Home     = SAKURA-VPS
+# Roaches in Japan are huge.
+# I mean it.
+Dislikes = roaches!
+Likes    = birds!
 ```
