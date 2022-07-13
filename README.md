@@ -61,7 +61,7 @@ Likes    = birds!
 Dislikes = roaches!
 ```
 
-### Reading *.ini* file.   
+### Reading *.ini* file:   
 ```golang
 // file is a map data that has section names as its keys.
 file := wini.Load("iniFilePath.ini")
@@ -99,7 +99,7 @@ AddCommentSym("?")
 
 file := Load("iniFilePath.ini")
 ```
-### Editing *.ini* file.
+### Editing *.ini* file:  
 - Changing section names, key-value keys and values, and comments:
 ```golang
 // Change section name from Author to Founder.
@@ -139,11 +139,49 @@ kv.ChangeKey("Hates")
 // Check function retrieves each line of key-val comments and key-val itself as string.
 kvStr := Check(kv)
 fmt.Println(kvStr)
+```
+```
+[output]:
+# Roaches in Japan are huge.
+# I mean it.
+Hates=roaches!
+```
 
-/*[output]:
-    # Roaches in Japan are huge.
-    # I mean it.
-    Hates=roaches!
-*/
+- Changing order of  sections or key-val data:  
+Swapping sections.
+```golang
+file.Swap("Author","Info")
+fmt.Println(Check(file))
+```
+```
+[output]:
+# Some basic info about the author.
+[Info]
+National = JAPAN
+Home     = SAKURA-VPS
+Likes    = birds!
+# Roaches in Japan are huge.
+# I mean it.
+Dislikes = roaches!
 
+# Name and age of the author.
+[Author]
+Name = ZEN
+Age = 1
+```
+Swapping key-val data.
+```golang
+file["Info"].Swap("Likes", "Dislikes")
+fmt.Println(Check(file["Info"]))
+```
+[output]:  
+```
+# Some basic info about the author.
+[Info]
+National = JAPAN
+Home     = SAKURA-VPS
+# Roaches in Japan are huge.
+# I mean it.
+Dislikes = roaches!
+Likes    = birds!
 ```
