@@ -18,7 +18,7 @@ It will let you read,edit,and create .ini file.
 
 - About *section* and *key-value data*
   - Texts that start with "[" and end with "]" are considered as *section* by default.
-  - By default,wini assumes Keys and// Swapping key-val data.
+  - wini assumes Keys and// Swapping key-val data by default.
 
 - Example:
 ```
@@ -34,7 +34,7 @@ Age = 1
 # "Country" key-val data comment.
 Country = Japan
 
-#Comments like below are not supported.
+# Comments like below are not supported.
 //multi-character comment symbol.
 /*
 multi-line comment symbol.
@@ -84,10 +84,10 @@ Getting section / key-val comment.
 auth := file["Author"]
 
 // Call Com method of section. 0 is the index of comments.
-// Com returns comments struct.
+// Com returns comment struct.
 secComs := auth.Com(0)
 
-// Call Get method of comments
+// Call Get method to get comment text.
 com := secComs.Get()
 
 fmt.Println(com) 
@@ -123,7 +123,7 @@ ChangeSectionSym("'", "'")
 // Note that default symbols "#" and ";" are also valid.
 AddCommentSym("?")         
 
-file := Load("iniFilePath.ini")
+file := wini.Load("iniFilePath.ini")
 ```
 # 2.**Editing *.ini* file:**  
 
@@ -286,6 +286,27 @@ ZEN=RYOKU
 # Key-val comment.
 John=Adams
 ```
+
+## Helper function *Check*
+If you want to take a look at your file,section,or keyval, use *Check* function.  
+*Check* returns the data as string. Keep in mind that it ignores empty lines.  
+It will also add 1 new empty line between sections for visibility when *file* is passed.
+
+```golang
+str := wini.Check(file["Info"])
+fmt.Println(str)
+```
+[output]:
+```
+[Info]
+National = JAPAN
+Home     = SAKURA-VPS
+Likes    = birds!
+# Roaches in Japan are huge.
+# I mean it.
+Dislikes = roaches!
+```
+
 
 ## Save changes.
 There are two methods to save, *Save()* and *Savef(string,int,int,int)*.  
