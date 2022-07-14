@@ -11,7 +11,8 @@ type Section struct {
 }
 
 func NewSection(text string) *Section {
-	checkSecSym(text)
+	// checkSecSym(text)
+	text = sectionSymbol[0] + text + sectionSymbol[1]
 	l := &lnode{}
 	l.setType(SEC)
 	l.setIdentifier(getSectionName(text))
@@ -82,16 +83,16 @@ func (s *Section) Data() map[string]string {
 
 //Adds keyval to section.
 func (s *Section) AddKeyVal(kvs ...*keyval) *Section {
-	var lastkv *keyval
+	//var lastkv *keyval
 	for _, kv := range kvs {
 		insertBlock(s, kv)
 		s.data = append(s.data, kv)
-		lastkv = kv
+		//lastkv = kv
 	}
 	//call this on last keyval.
-	if lastkv != nil {
-		adjustEmptyLine(lastkv)
-	}
+	// if lastkv != nil {
+	// 	adjustEmptyLine(lastkv)
+	// }
 	return s
 
 }
@@ -166,24 +167,24 @@ func (sec *Section) tail() *lnode {
 //Last node of section can be a empty line,
 //so added keyval could be inserted after it.
 //It looks better swapped...
-func adjustEmptyLine(kv *keyval) {
-	h, t := kv.Range()
-	if h == t {
-		if t.ntype == KEYVAL && t.next != nil && t.prev != nil {
-			if (t.next.ntype == SEC || t.next.ntype == SECCOM) && t.prev.ntype == EMPTY {
-				pop(t.prev)
-				t.insert(&lnode{ntype: EMPTY, identifier: kv.key})
-				//t.insertBlock(&lnode{ntype: EMPTY, identifier: kv.key})
+// func adjustEmptyLine(kv *keyval) {
+// 	h, t := kv.Range()
+// 	if h == t {
+// 		if t.ntype == KEYVAL && t.next != nil && t.prev != nil {
+// 			if (t.next.ntype == SEC || t.next.ntype == SECCOM) && t.prev.ntype == EMPTY {
+// 				pop(t.prev)
+// 				t.insert(&lnode{ntype: EMPTY, identifier: kv.key})
+// 				//t.insertBlock(&lnode{ntype: EMPTY, identifier: kv.key})
 
-			}
-		}
-	} else {
-		if h.ntype == KEYCOM && t.next != nil && h.prev != nil {
-			if (t.next.ntype == SEC || t.next.ntype == SECCOM) && h.prev.ntype == EMPTY {
-				pop(h.prev)
-				t.insert(&lnode{ntype: EMPTY, identifier: kv.key})
-			}
-		}
-	}
-	//printall(h)
-}
+// 			}
+// 		}
+// 	} else {
+// 		if h.ntype == KEYCOM && t.next != nil && h.prev != nil {
+// 			if (t.next.ntype == SEC || t.next.ntype == SECCOM) && h.prev.ntype == EMPTY {
+// 				pop(h.prev)
+// 				t.insert(&lnode{ntype: EMPTY, identifier: kv.key})
+// 			}
+// 		}
+// 	}
+
+// }

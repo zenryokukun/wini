@@ -17,11 +17,20 @@ func Check(rg Ranger) string {
 	h, t := rg.Range()
 	str := ""
 	for {
-		str += h.text
+		txt := h.text
+		emp := isEmpty(txt)
+		if !emp {
+			str += h.text
+		}
 		if h == t {
 			break
 		}
-		str += "\n"
+		if !emp {
+			str += "\n"
+		}
+		if h.next != nil && (h.ntype != SEC && h.ntype != SECCOM) && (h.next.ntype == SEC || h.next.ntype == SECCOM) {
+			str += "\n"
+		}
 		h = h.next
 	}
 	return str
@@ -80,9 +89,9 @@ func swapAdjacent(h1, t1, h2, t2 *lnode) {
 	}
 
 	//Add empty line between section after swapping.
-	if right_t.ntype != EMPTY {
-		right_t.insert(&lnode{ntype: EMPTY, identifier: right_t.identifier, text: ""})
-	}
+	// if right_t.ntype != EMPTY {
+	// 	right_t.insert(&lnode{ntype: EMPTY, identifier: right_t.identifier, text: ""})
+	// }
 
 }
 
@@ -107,12 +116,12 @@ func swapRange(h1, t1, h2, t2 *lnode) {
 	}
 
 	//Add empty line between section after swapping.
-	if t1.ntype != EMPTY {
-		t1.insert(&lnode{ntype: EMPTY, identifier: t1.identifier, text: ""})
-	}
-	if t2.ntype != EMPTY {
-		t2.insert(&lnode{ntype: EMPTY, identifier: t2.identifier, text: ""})
-	}
+	// if t1.ntype != EMPTY {
+	// 	t1.insert(&lnode{ntype: EMPTY, identifier: t1.identifier, text: ""})
+	// }
+	// if t2.ntype != EMPTY {
+	// 	t2.insert(&lnode{ntype: EMPTY, identifier: t2.identifier, text: ""})
+	// }
 }
 
 func isAdjacent(h1, t1, h2, t2 *lnode) bool {

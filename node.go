@@ -162,6 +162,12 @@ func isSection(line string) bool {
 	return strings.HasPrefix(tm, left) && strings.HasSuffix(tm, right)
 }
 
+func isEmpty(line string) bool {
+	tm := strings.TrimLeft(line, " ")
+	tm = strings.TrimLeft(tm, "\t")
+	return tm == "\n" || tm == ""
+}
+
 func which(line string) int {
 	tm := trimSpaces(line)
 	if len(tm) == 0 {
